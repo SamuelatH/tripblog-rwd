@@ -1,0 +1,80 @@
+
+/* 文章間距排版 */
+.single-blog-area {
+  position: relative;
+  z-index: 1; }
+
+  .single-blog-area .single-blog-thumbnail {
+    position: relative;
+    z-index: 1; }
+    
+    .single-blog-area .single-blog-thumbnail img {
+      width: 100%; }
+    /* 這是文章上面日期的格式的東東(start)*/
+    .single-blog-area .single-blog-thumbnail .post-date {
+      position: absolute;
+      z-index: 10;
+      left: 15px;
+      top: 15px;
+      border: 1px solid #787878;
+      background-color: #ffffff;
+      padding: 20px 8px;
+      text-align: center; }
+      .single-blog-area .single-blog-thumbnail .post-date a {
+        font-size: 24px;
+        text-transform: uppercase;
+        color: #000000;
+        line-height: 1;
+        font-family: "helveticaneuemedium"; }
+        .single-blog-area .single-blog-thumbnail .post-date a span {
+          display: block;
+          font-family: "Open Sans", sans-serif;
+          font-size: 11px;
+          color: #878787; }
+      /* 這是文章上面日期的格式的東東(end)*/
+  
+  .single-blog-area .single-blog-content .line {
+    background-color: #c8c8c8;
+    width: 26px;
+    height: 2px;
+    margin-bottom: 20px; }
+    
+  .single-blog-area .single-blog-content .post-tag {
+    color: #a1a1a1;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    display: block; }
+
+      
+  .single-blog-area .single-blog-content h4 a {
+    display: inline-block;
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 30px; }
+    .single-blog-area .single-blog-content h4 a:hover, .single-blog-area .single-blog-content h4 a:focus {
+      color: #30336b; }
+
+
+  .single-blog-area .single-blog-content .post-meta p {
+    font-size: 9px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    letter-spacing: 3px;
+    display: inline-block; }
+
+    .single-blog-area .single-blog-content .post-meta p a {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #000000;
+      letter-spacing: 3px; }
+
+
+
+
+
+
+
+
+

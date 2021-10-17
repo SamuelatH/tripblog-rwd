@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripBlog</title>
+    <meta name="description" content="">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Johnny">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/css/all_css.css" th:href="@{/css/all_css.css}">
+</head>
+
+<body class=" bg-milkyellow">
+
+<!-- 會員導航欄 -->
+<div th:fragment="userNav(page)" class="card-header d-flex sticky-top bg-gr0201 rounded-3">
+    <ul class="nav nav-tabs card-header-tabs h4 mx-auto">
+        <li class="nav-item me-3">
+            <a class="nav-link " href="my_space.html" th:classappend="${page==1} ? 'active disabled'" th:href="@{/user/space}">Introduce</a>
+        </li>
+
+        <li class="nav-item me-3">
+            <a class="nav-link " href="my_article_travel.html" th:classappend="${page==2} ? 'active disabled'" th:href="@{/user/travel}">MyTravel</a>
+        </li>
+
+        <li class="nav-item me-3">
+            <a class="nav-link" href="my_article_eat.html" th:classappend="${page==3} ? 'active disabled'" th:href="@{/user/eat}">MyEat</a>
+        </li>
+
+        <li class="nav-item me-3">
+            <a class="nav-link " href="my_collection.html" th:classappend="${page==4} ? 'active disabled'" th:href="@{/user/collection}">MyCollect</a>
+        </li>
+
+        <li class="nav-item me-3">
+            <a class="nav-link" href="my_profile.html" th:classappend="${page==5} ? 'active disabled'" th:href="@{/user/profile}">Edition</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " href="my_notify.html" th:classappend="${page==6} ? 'active disabled'" th:href="@{/user/notify}">Message</a>
+        </li>
+    </ul>
+</div>
+<!-- 會員導航欄 END-->
+
+
+</body>
+
+</html>

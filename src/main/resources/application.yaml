@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: j123
+    url: jdbc:mysql://localhost:3306/tripblog?serverTimezone=Asia/Taipei&Encoding=utf-8
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  #Email
+  mail:
+    default-encoding: UTF-8
+    #谷歌信箱
+    host: smtp.gmail.com
+    port: 587
+    #帳號和授權碼
+    username: Java017TripBlog@gmail.com
+    password: awzpnslqqbfgtnww
+    #用戶認證
+    properties:
+      mail:
+        smtp:
+          auth: true
+          #STARTTLS 通訊連線加密
+          starttls.enable: true
+          starttls.required: true
+          #超時設定
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+logging:
+  level:
+    root: info
+    com.yucheng: debug
+
+#HTTPS憑證
+server:
+  port: 8080
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:localhost.p12
+    enabled: true
+    protocol: TLS
+    key-store-password: changeit
+
+
+
+
+

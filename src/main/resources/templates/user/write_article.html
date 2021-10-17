@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripBlog Write</title>
+    <meta name="description" content="Write">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Johnny">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/css/all_css.css" th:href="@{/css/all_css.css}">
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+
+
+    <style>
+        /* 字數提醒 */
+        .titleText {
+            margin-top: 11px;
+            padding-left: 23px;
+            font-size: 8px;
+            color: red;
+        }
+
+        /* 編輯器高度設定 */
+        .ck-editor__editable {
+            min-height: 300px;
+        }
+
+        /* 文章標題 */
+        .txt-block {
+            margin-top: -35px;
+        }
+
+        /* 標題字數限制提醒 */
+        .txt-block-1 {
+            margin-top: -25px;
+            font-size: 8px;
+        }
+    </style>
+
+</head>
+
+<body class="bg-milkyellow">
+
+    <!-- 總導覽列 -->
+    <nav th:replace="fragments :: nav(0)" class="navbar-head navbar  navbar-expand-lg navbar-dark shadow p-2 rounded bg-bl04">
+        <div class="container-fluid">
+
+            <!-- 左邊網站名稱 -->
+            <div class="col-2 mb-2">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../../static/images/nav_logo_05.svg" class="w-100">
+                </a>
+            </div>
+            <!-- 折疊插件 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- 中間連接清單 -->
+                <ul class="navbar-nav mx-auto mb-0 mb-lg-0">
+
+                    <li class="nav-item me-5 d-flex">
+                        <a class="nav-link p-0 mt-3 " href="../article_travel.html">
+                            <div class="fs-5 fw-bolder ">Travel</div>
+                        </a>
+                    </li>
+
+                    <li class="nav-item me-5">
+                        <a class="nav-link  p-0 mt-3" href="../article_eat.html">
+                            <div class="fs-5 fw-bolder ">Eat</div>
+                        </a>
+                    </li>
+
+                    <li class="nav-item me-5">
+                        <a class="nav-link  p-0 mt-3" href="../map_search.html">
+                            <div class="fs-5 fw-bolder">MapSearch</div>
+                        </a>
+                    </li>
+
+                    <li class="nav-item me-5">
+                        <a class="nav-link  p-0 mt-3" href="../about.html">
+                            <div class="fs-5 fw-bolder">AboutUs</div>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <!-- 導覽右邊 -->
+                <div class="d-flex align-items-center">
+
+                    <!-- 頭像 -->
+                    <img src="https://semantic-ui.com/images/avatar2/small/elyse.png" alt="頭貼"
+                        class="me-3 rounded-circle" style="width: 3rem;">
+
+
+                    <!-- 下拉選單 -->
+                    <div class="dropdown">
+                        <!-- 選單標題 -->
+                        <a class="btn  btn-info dropdown-toggle btn-milkyellow text-bl04 fw-bold rounded-pill" href="#"
+                            role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            訪客
+                        </a>
+                        <!-- 選單內容 -->
+                        <ul class="dropdown-menu dropdown-menu-end border-5 border-jumpBorderGreen rounded"
+                            aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item rounded fw-bold" href="../user/write_article.html">撰寫文章</a></li>
+                            <li><a class="dropdown-item rounded fw-bold" href="../user/my_space.html">我的空間</a></li>
+                            <li><a class="dropdown-item rounded fw-bold" href="../user/my_notify.html">訊息通知</a></li>
+                            <hr class="dropdown-divider rounded fw-bold">
+                            <li><a class="dropdown-item rounded fw-bold" href="../user/signup.html">註冊</a></li>
+                            <li><a class="dropdown-item rounded fw-bold" href="../user/login.html">登入</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <!-- 結束:總導覽列 -->
+
+    <!-- 上次發布編輯時間 -->
+    <div class="container">
+        <div class="row mt-2 mb-2">
+            <div class="col-4"></div>
+            <div class="col-4"></div>
+            <div class="col-4 text-end text-bl05 fw-bold">
+                updateTime
+            </div>
+        </div>
+    </div>
+    <!-- 主題分類(美食.旅遊)、地區分類、地址標籤、發票收據 表單開始-->
+    <form action="">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 col-md-3 mb-2">
+                    <select class="form-select border-2 border-bl03 bg-gr0200 rounded-pill"
+                        aria-label="Default select example">
+                        <option selected disabled>主題分類</option>
+                        <option value="1">美食</option>
+                        <option value="2">旅遊</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3 mb-2">
+                    <select class="form-select border-2 border-bl03 bg-gr0200 rounded-pill"
+                        aria-label="Default select example">
+                        <option selected disabled>選擇地區</option>
+                        <option value="1">台北市</option>
+                        <option value="2">新北市</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-6 mb-2">
+                    <input class="form-control border-2 border-bl03 bg-gr0200 rounded-pill" placeholder="輸入地址"
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <!-- 標題 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-11 col-sm-12 mb-4 txt-block">
+                    <input class="form-control border-2 border-bl03 bg-gr0200 rounded-pill" placeholder="文章標題"
+                        type="text">
+                </div>
+                <div class="col-md-1 col-sm-12 txt-block-1">
+                    <label class="text-pk03">標題可輸入30字</label>
+                </div>
+            </div>
+            <!-- 封面圖---------------------------------------------------- -->
+            <div class="row">
+                <!-- 上傳封面圖的上傳器 -->
+                <div class="col-md-5 mb-3">
+                    <div class="input-group">
+                        <input type="file" class="form-control border-2 border-bl03 bg-gr0200 rounded-pill"
+                            id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Upload"
+                            onchange="readURL(this)" targetID="preview_progressbarTW_img"
+                            accept="image/gif, image/jpeg, image/png">
+                        <button class="btn btn-light border-2 border-bl03 rounded-pill text-bl03 fw-bold" type="button"
+                            id="inputGroupFileAddon">上傳</button>
+                        <label class="titleText text-pk03">請選擇封面圖片</label>
+                    </div>
+                </div>
+                <!-- 上傳發票的上傳器 -->
+                <div class="col-md-5 mb-4">
+                    <div class="input-group">
+                        <input type="file" class="form-control border-2 border-bl03 bg-gr0200 rounded-pill"
+                            id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"
+                            onchange="readBill(this)" targetID="bill_img" accept="image/gif, image/jpeg, image/png">
+                        <!-- 預覽光箱內的上傳發票收據 -->
+                        <button class="btn btn-light border-2 border-bl03 rounded-pill text-bl03 fw-bold "
+                            onclick="openbt()" type="button" id="inputGroupFileAddon04">上傳</button>
+                        <label class="titleText text-pk03">請上傳發票收據</label>
+                    </div>
+                </div>
+
+                <!-- Button trigger modal -->
+                <div class="col-md-2 text-md-end mb-3">
+                    <button type="button " id="bt" disabled="true"
+                        class="btn btn-bl03 border-2 border-gr0200 rounded-pill text-gr0200 fw-bold"
+                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        發票收據
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">預覽</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                上傳的圖檔
+                            </div>
+                            <div class="col-12">
+                                <img id="bill_img" width="100%" height="100%">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 預覽封面圖的欄位 -->
+            <div class="row">
+                <div class="col ">
+                    <img class="bg-light" id="preview_progressbarTW_img" width="100%" height="300px">
+                </div>
+            </div>
+
+
+            <!-- 編輯文章內容 -->
+            <div class="row mt-3 mb-3">
+                <div class="col">
+                    <form id="form1" runat="server">
+                        <div style="margin: 0 auto; width: 100%">
+                            <textarea id="editor"></textarea>
+                        </div>
+                    </form>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'))
+                            .then(editor => {
+                                console.log(editor);
+                            })
+                    </script>
+                </div>
+            </div>
+            <!----- 地圖 ----->
+            <div class="row">
+                <div class="col">
+                    <iframe src="https://maps.google.com?output=embed&amp;q=北科大光華館" frameborder="" width="100%"
+                        height="300px">
+                    </iframe>
+                </div>
+            </div>
+            <!-- 保存發布 -->
+            <div class="row mt-3 mb-5">
+                <div class="col-4 mt-2">
+                    <button type="button"
+                        class="btn btn-light  border-2 border-pk03 rounded-pill text-pk03 fw-bold shadow-sm">捨棄草稿</button>
+                </div>
+                <div class="col-8 text-end mt-2">
+                    <button type="submit"
+                        class="btn btn-light btn-bl03 border-2 border-gr0200 rounded-pill text-gr0200 fw-bold">發表文章</button>
+                    <button type="submit"
+                        class="btn btn-light border-2 border-bl03 rounded-pill text-bl03 fw-bold">儲存草稿</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+    <!-- 光箱必須的code -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // 激活按鈕的函式
+        function openbt() {
+            document.getElementById("bt").disabled = false;
+        }
+        // 預覽上傳發票的函式
+        function readBill(input) {
+            if (input.files && input.files[0]) {
+                var imageTagID = input.getAttribute("targetID");
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.getElementById(imageTagID);
+                    img.setAttribute("src", e.target.result)
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // 預覽上傳圖片的函式
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var imageTagID = input.getAttribute("targetID");
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.getElementById(imageTagID);
+                    img.setAttribute("src", e.target.result)
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <!-- 尾頁 -->
+    <footer class="bg-bl04 py-5">
+        <div class="container px-4 px-lg-5 py-2">
+            <div class="small text-center text-milkyellow ">
+                Copyright &copy; 2021 - TripBlog
+            </div>
+            <div class="small text-center text-milkyellow ">
+                國立臺北科技大學 JAVA 程式設計人才養成班第十七屆 第四組專題
+            </div>
+        </div>
+    </footer>
+    <!-- 結束:尾頁 -->
+
+
+</body>
+
+</html>
