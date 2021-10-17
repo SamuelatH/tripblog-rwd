@@ -13,7 +13,13 @@
     <!-- 自訂css -->
     <link rel="stylesheet" href="../../static/css/article_style.css" th:href="@{/css/article_style.css}">
 </head>
-
+    <style>
+        @media screen and (max-width: 768px) {
+            p, a{
+            padding-left: 5px;
+            } 
+        }
+        </style>
 <body>
     <!-- 總導覽列 -->
     <nav th:replace="fragments :: nav(0)" class="navbar-head navbar  navbar-expand-lg navbar-dark shadow p-2 rounded bg-bl04">
